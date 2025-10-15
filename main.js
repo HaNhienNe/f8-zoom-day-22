@@ -7,7 +7,8 @@ const modelCloseBtn = $('.modal-close');
 const addTaskModal = $('#addTaskModal');
 const addBtn = $('.add-btn');
 
-const data = [];
+const data = JSON.parse(localStorage.getItem("tasks")) ?? [];
+renderTask();
 
 // ----- Modal -----
 function toggleModal(show = false) {
@@ -47,6 +48,7 @@ todoForm.onsubmit = (event) => {
         if (typeof newTask[k] === 'string') newTask[k] = newTask[k].trim();
     }
     data.unshift(newTask);
+    localStorage.setItem("tasks", JSON.stringify(data));
     renderTask();
     todoForm.reset();
     closeModal();
