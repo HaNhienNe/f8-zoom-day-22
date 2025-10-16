@@ -12,6 +12,8 @@ const activeButton = $('#activeButton');
 const completedButton = $('#completedButton');
 const allButton = $('#allButton');
 const keySearch = $('.search-input');
+const modalTitle = $('.modal-title');
+const submitBtn = $('#submit-btn');
 
 // =============================
 // STATE / MODE
@@ -71,7 +73,7 @@ taskErea.addEventListener('click', (event) => {
     const currentTask = data.find(task => task.id === currentTaskID);
 
     if (elEdit) {
-        toggleModal(true);
+        openModal();
         MODE.setMode(MODE.UPDATE);
         fillDataFom(todoForm, currentTask);
     }
@@ -92,10 +94,9 @@ taskErea.addEventListener('click', (event) => {
 });
 
 // Modal open/close buttons
-const closeModal = () => toggleModal(false);
-addBtn.onclick = () => toggleModal(true);
-modelCloseBtn.onclick = closeModal;
-cancelBtn.onclick = closeModal;
+addBtn.addEventListener('click', openModal);
+modelCloseBtn.addEventListener('click', closeModal);
+cancelBtn.addEventListener('click', closeModal);
 
 // =============================
 // STARTUP
@@ -108,22 +109,31 @@ function start() {
 // =============================
 // MODAL
 // =============================
-function toggleModal(show = false) {
+
+function openModal() {
+    console.log('adasd')
+    addTaskModal.classList.add('show');
+    setTimeout(() => {
+        updateUiForm();
+        $('#taskTitle')?.focus();
+    }, 200);
+}
+
+function closeModal() {
+    updateUiForm();
+    todoForm.reset();
+    addTaskModal.classList.remove('show');
+    MODE.setMode(MODE.CREATE);
+}
+
+function updateUiForm() {
     clerErr();
-    addTaskModal.classList.toggle('show', show);
-    if (show) {
-        setTimeout(() => {
-            const modalTitle = $('.modal-title');
-            const submitBtn = $('#submit-btn');
-            $('#taskTitle')?.focus();
-            if (MODE.getMode() === MODE.UPDATE) {
-                modalTitle.innerHTML = 'Update Task';
-                submitBtn.innerHTML = 'Save';
-            } else {
-                modalTitle.innerHTML = 'Add New Task';
-                submitBtn.innerHTML = 'Create Task';
-            }
-        }, 100);
+    if (MODE.getMode() === MODE.UPDATE) {
+        modalTitle.innerHTML = 'Update Task';
+        submitBtn.innerHTML = 'Save';
+    } else {
+        modalTitle.innerHTML = 'Add New Task';
+        submitBtn.innerHTML = 'Create Task';
     }
 }
 
