@@ -317,6 +317,7 @@ body {
     color: var(--c-muted);
     line-height: 1.5;
     margin-bottom: 1rem;
+    min-height: 21px;
 }
 
 .task-meta {

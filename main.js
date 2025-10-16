@@ -118,10 +118,10 @@ function toggleModal(show = false) {
             $('#taskTitle')?.focus();
             if (MODE.getMode() === MODE.UPDATE) {
                 modalTitle.innerHTML = 'Update Task';
-                submitBtn.value = 'Save';
+                submitBtn.innerHTML = 'Save';
             } else {
                 modalTitle.innerHTML = 'Add New Task';
-                submitBtn.value = 'Create Task';
+                submitBtn.innerHTML = 'Create Task';
             }
         }, 100);
     }
@@ -183,7 +183,7 @@ function fillDataFom(targetForm, dataFill) {
 }
 
 function clerErr() {
-    $$('.messgae-err').forEach(elErr => { elErr.remove(); });
+    $$('.message-error').forEach(elErr => { elErr.remove(); });
     $$('.is-invalid')?.forEach(elErr => { elErr.classList.remove('is-invalid'); });
 }
 // Submit Form
@@ -221,7 +221,7 @@ todoForm.onsubmit = (event) => {
             if (el) {
                 el.classList.add("is-invalid");
                 const messageEl = document.createElement('div');
-                messageEl.className = "messgae-err";
+                messageEl.className = "message-error";
                 messageEl.innerHTML = err.messages.map(msg => `<p>${msg}</p>`).join('');
                 el.after(messageEl);
                 el.onchange = (e) => {
@@ -388,7 +388,7 @@ function validateTask(task) {
                     const startTotal = startH * 60 + startM;
                     const endTotal = endH * 60 + endM;
                     if (endTotal < startTotal) {
-                        hasError = true;
+                        result.hasError = true;
                         msgError = "End time must be after start time!";
                         err.messages.push(msgError);
                     }
