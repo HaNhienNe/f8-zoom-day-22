@@ -72,7 +72,7 @@ taskErea.addEventListener('click', (event) => {
     const data = getAllData();
     const currentTask = data.find(task => task.id === currentTaskID);
 
-    if (elEdit) {
+    if (elEdit && !currentTask.isCompleted) {
         openModal();
         MODE.setMode(MODE.UPDATE);
         fillDataFom(todoForm, currentTask);
@@ -272,7 +272,7 @@ function renderTask(data = searchTasks()) {
         <button class="task-menu">
           <i class="fa-solid fa-ellipsis fa-icon"></i>
           <div class="dropdown-menu">
-            <div class="dropdown-item edit">
+            <div class="dropdown-item edit ${task.isCompleted ? 'disabled' : ''}">
               <i class="fa-solid fa-pen-to-square fa-icon"></i>
               Edit
             </div>

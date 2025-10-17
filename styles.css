@@ -335,7 +335,7 @@ body {
 
 /* Completed state */
 .task-card.completed {
-    opacity: .7;
+    opacity: 1;
 }
 
 .task-card.completed .task-title {
@@ -433,6 +433,11 @@ body {
     outline-offset: 2px;
     border-radius: var(--r-6);
     transition: .2s ease;
+}
+
+.disabled {
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 /* ========== Modal ========== */
