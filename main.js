@@ -208,7 +208,7 @@ todoForm.onsubmit = (event) => {
         startTime: "",
         endTime: "",
         dueDate: "",
-        cardColor: "",
+        color: "",
         isCompleted: false,
         isDeleted: false,
     };
@@ -266,7 +266,7 @@ todoForm.onsubmit = (event) => {
 // =============================
 function renderTask(data = searchTasks()) {
     const html = data.map((task) => {
-        return `<div class="task-card ${escapeHTML(task.cardColor)} ${task.isCompleted ? "completed" : ""}" data-id="${task.id}">
+        return `<div class="task-card ${escapeHTML(task.color)} ${task.isCompleted ? "completed" : ""}" data-id="${task.id}">
       <div class="task-header">
         <h3 class="task-title">${getIconCategory(task.category)} | ${truncateText(escapeHTML(task.title))}</h3>
         <button class="task-menu">
